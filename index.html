@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDUMANE | Proudly Made in Mamelodi Est. 2023</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter & Space Grotesk -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            base: '#F4F1EA',      /* Warm Off-White / Cream Foundation */
+                            surface: '#FAF8F5',   /* Soft Light Surface */
+                            sand: '#E6DFD1',      /* Neutral Sand Accent */
+                            ochre: '#C88A33',     /* Mamelodi Earth Ochre Accent */
+                            terracotta: '#A84325',/* Rich Rust / Terracotta Accent */
+                            charcoal: '#1A1816',  /* Deep Rich Neutral Text */
+                            muted: '#767067'      /* Secondary Muted Text */
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 30px -5px rgba(26, 24, 22, 0.05)',
+                        'card': '0 20px 40px -15px rgba(26, 24, 22, 0.08)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #F4F1EA;
+            color: #1A1816;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-header {
+            background: rgba(244, 241, 234, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: 200%;
+            animation: marquee 30s linear infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-brand-ochre selection:text-white">
+
+    <!-- A. Announcement Bar -->
+    <div class="bg-brand-charcoal text-brand-base text-[11px] font-semibold py-2.5 px-4 overflow-hidden tracking-widest uppercase">
+        <div class="animate-marquee whitespace-nowrap flex gap-10 items-center">
+            <span>🔥 PROUDLY MADE IN MAMELODI</span>
+            <span>•</span>
+            <span>ESTABLISHED 2023</span>
+            <span>•</span>
+            <span>ROOTED IN IDENTITY — DESIGNED TO STAND OUT</span>
+            <span>•</span>
+            <span>FAST WHATSAPP CHECKOUT AVAILABLE</span>
+            <span>•</span>
+            <span>🔥 PROUDLY MADE IN MAMELODI</span>
+            <span>•</span>
+            <span>ESTABLISHED 2023</span>
+            <span>•</span>
+            <span>ROOTED IN IDENTITY — DESIGNED TO STAND OUT</span>
+            <span>•</span>
+            <span>FAST WHATSAPP CHECKOUT AVAILABLE</span>
+        </div>
+    </div>
+
+    <!-- B. Navigation Header -->
+    <header class="sticky top-0 z-40 glass-header border-b border-stone-300/60 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Mobile Menu Toggle & Search Trigger -->
+            <div class="flex items-center gap-3">
+                <button onclick="toggleMobileMenu()" class="p-2.5 rounded-full hover:bg-stone-200/60 transition lg:hidden" aria-label="Open Menu">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+                <button onclick="openSearchModal()" class="hidden sm:flex items-center gap-2 bg-stone-200/60 hover:bg-stone-200 rounded-full px-4 py-2 text-xs font-medium text-brand-muted transition">
+                    <i data-lucide="search" class="w-4 h-4"></i>
+                    <span>Search drops...</span>
+                </button>
+            </div>
+
+            <!-- Brand Logo -->
+            <a href="#" class="text-center group">
+                <h1 class="font-display text-2xl sm:text-3xl font-black tracking-tight uppercase text-brand-charcoal group-hover:text-brand-terracotta transition">
+                    SDUMANE<span class="text-brand-terracotta">.</span>
+                </h1>
+                <p class="text-[9px] font-bold tracking-[0.3em] uppercase text-brand-muted -mt-1">Mamelodi Est. 2023</p>
+            </a>
+
+            <!-- Right Actions: Wishlist & Cart -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <button onclick="openWishlistDrawer()" class="relative p-2.5 bg-stone-200/60 hover:bg-stone-200 rounded-full transition" aria-label="Wishlist">
+                    <i data-lucide="heart" class="w-5 h-5"></i>
+                    <span id="wishlistCount" class="absolute -top-1 -right-1 bg-brand-terracotta text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                </button>
+                <button onclick="openCartDrawer()" class="relative p-3 bg-brand-charcoal text-brand-base hover:bg-brand-terracotta rounded-full transition shadow-soft" aria-label="Shopping Cart">
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    <span id="cartCount" class="absolute -top-1 -right-1 bg-brand-terracotta text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-brand-base">0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden lg:flex justify-center border-t border-stone-200/50 py-3 gap-10 text-xs font-bold tracking-widest uppercase text-brand-charcoal">
+            <a href="#" class="hover:text-brand-terracotta transition">Home</a>
+            <a href="#catalogue" class="hover:text-brand-terracotta transition">Shop Catalogue</a>
+            <a href="#collections" class="hover:text-brand-terracotta transition">Collections</a>
+            <a href="#about" class="hover:text-brand-terracotta transition">Our Story</a>
+            <a href="#footer" class="hover:text-brand-terracotta transition">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Mobile Drawer Navigation -->
+    <div id="mobileMenu" class="fixed inset-0 bg-brand-charcoal/60 backdrop-blur-md z-50 hidden transition-opacity">
+        <div class="bg-brand-surface w-4/5 max-w-xs h-full p-6 flex flex-col justify-between shadow-2xl">
+            <div>
+                <div class="flex items-center justify-between pb-6 border-b border-stone-200">
+                    <h2 class="font-display text-2xl font-black uppercase text-brand-charcoal">SDUMANE</h2>
+                    <button onclick="toggleMobileMenu()" class="p-2 rounded-full hover:bg-stone-200"><i data-lucide="x" class="w-6 h-6"></i></button>
+                </div>
+                <div class="mt-8 flex flex-col gap-6 text-sm font-bold uppercase tracking-widest text-brand-charcoal">
+                    <a href="#" onclick="toggleMobileMenu()" class="hover:text-brand-terracotta">Home</a>
+                    <a href="#catalogue" onclick="toggleMobileMenu()" class="hover:text-brand-terracotta">Shop Catalogue</a>
+                    <a href="#collections" onclick="toggleMobileMenu()" class="hover:text-brand-terracotta">Collections</a>
+                    <a href="#about" onclick="toggleMobileMenu()" class="hover:text-brand-terracotta">Our Story</a>
+                    <a href="#footer" onclick="toggleMobileMenu()" class="hover:text-brand-terracotta">Contact</a>
+                </div>
+            </div>
+            <div class="border-t border-stone-200 pt-6">
+                <p class="text-xs font-bold text-brand-charcoal uppercase">Made in Mamelodi</p>
+                <p class="text-[11px] text-brand-muted mt-1">Established 2023. Rooted in Identity.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- C. Hero Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12">
+        <div class="relative rounded-3xl overflow-hidden bg-stone-900 text-white min-h-[520px] sm:min-h-[600px] flex items-end p-8 sm:p-14 shadow-2xl border border-stone-800">
+            <!-- Background Image from Supplied Assets -->
+            <div class="absolute inset-0 bg-cover bg-center opacity-60 mix-blend-overlay scale-105 transition-transform duration-1000 hover:scale-100" style="background-image: url('WhatsApp Image 2026-11-05 at 12.03.51.jpeg');"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/40 to-transparent"></div>
+
+            <div class="relative z-10 max-w-2xl">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-terracotta text-white text-[10px] font-black uppercase tracking-widest mb-4 shadow-md">
+                    <span>Proudly Made in Mamelodi • Est. 2023</span>
+                </div>
+                <h2 class="font-display text-4xl sm:text-6xl font-black tracking-tight leading-none uppercase mb-5 text-brand-base">
+                    ROOTED IN IDENTITY. <br/><span class="text-brand-ochre">DESIGNED TO STAND OUT.</span>
+                </h2>
+                <p class="text-stone-300 text-sm sm:text-base font-normal mb-8 max-w-lg leading-relaxed">
+                    SDUMANE represents creativity, originality, and the ambition to build something meaningful. Explore our authentic drops and order seamlessly via WhatsApp.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#catalogue" class="bg-brand-base text-brand-charcoal hover:bg-brand-ochre hover:text-white text-xs font-bold uppercase tracking-widest px-8 py-4 rounded-full transition shadow-lg">
+                        Shop Collection
+                    </a>
+                    <a href="#about" class="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs font-bold uppercase tracking-widest px-8 py-4 rounded-full transition">
+                        Our Story
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- D. Brand Introduction -->
+    <section id="about" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-brand-surface rounded-3xl p-8 sm:p-12 border border-stone-300/60 shadow-soft">
+            <div class="space-y-6">
+                <span class="text-xs font-bold text-brand-terracotta uppercase tracking-widest">About SDUMANE</span>
+                <h2 class="font-display text-3xl sm:text-4xl font-black text-brand-charcoal uppercase leading-tight">
+                    MORE THAN A BRAND. A STATEMENT.
+                </h2>
+                <p class="text-brand-muted text-sm sm:text-base leading-relaxed">
+                    Born in Mamelodi in 2023, SDUMANE is an authentic expression of modern street culture and community ambition. We design apparel that speaks with confidence, honoring our roots while pushing contemporary fashion forward.
+                </p>
+                <div class="grid grid-cols-3 gap-4 pt-4 border-t border-stone-200">
+                    <div>
+                        <p class="font-display text-2xl font-black text-brand-charcoal">2023</p>
+                        <p class="text-[10px] text-brand-muted uppercase font-bold">Established</p>
+                    </div>
+                    <div>
+                        <p class="font-display text-2xl font-black text-brand-terracotta">100%</p>
+                        <p class="text-[10px] text-brand-muted uppercase font-bold">Authentic Kasi</p>
+                    </div>
+                    <div>
+                        <p class="font-display text-2xl font-black text-brand-charcoal">FAST</p>
+                        <p class="text-[10px] text-brand-muted uppercase font-bold">WhatsApp Order</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="relative rounded-2xl overflow-hidden shadow-card h-80 lg:h-96 border border-stone-200">
+                <img src="WhatsApp Image 2026-11-05 at 12.03.51 (1).jpeg" alt="SDUMANE brand narrative" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-stone-950/70 via-transparent to-transparent flex items-end p-6">
+                    <p class="text-white text-xs font-mono font-bold tracking-widest uppercase">Mamelodi Street Culture • Est. 2023</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- E. Featured Collections -->
+    <section id="collections" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-4 border-b border-stone-300/60 gap-4">
+            <div>
+                <span class="text-xs font-bold text-brand-terracotta uppercase tracking-widest">Curated Series</span>
+                <h2 class="font-display text-3xl font-black text-brand-charcoal uppercase tracking-tight">Featured Collections</h2>
+            </div>
+            <p class="text-xs text-brand-muted max-w-sm">Explore our signature lines crafted for everyday wear and distinctive styling.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div onclick="filterCategory('tees')" class="group relative rounded-3xl overflow-hidden bg-stone-900 h-96 cursor-pointer shadow-soft border border-stone-800">
+                <img src="WhatsApp Image 2026-11-05 at 12.03.51.jpeg" class="w-full h-full object-cover opacity-70 group-hover:scale-105 transition duration-700" alt="Tees & Tops">
+                <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/30 to-transparent flex flex-col justify-end p-8">
+                    <span class="text-brand-ochre text-[10px] font-black uppercase tracking-widest mb-1">Drop 01</span>
+                    <h3 class="font-display text-2xl font-black text-white uppercase">Tees & Tops</h3>
+                    <p class="text-xs text-stone-300 mt-2">Heavyweight cotton crafted for maximum comfort and standout graphics.</p>
+                </div>
+            </div>
+
+            <div onclick="filterCategory('hoodies')" class="group relative rounded-3xl overflow-hidden bg-stone-900 h-96 cursor-pointer shadow-soft border border-stone-800">
+                <img src="WhatsApp Image 2026-11-05 at 12.03.51 (1).jpeg" class="w-full h-full object-cover opacity-70 group-hover:scale-105 transition duration-700" alt="Hoodies & Outerwear">
+                <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/30 to-transparent flex flex-col justify-end p-8">
+                    <span class="text-brand-ochre text-[10px] font-black uppercase tracking-widest mb-1">Drop 02</span>
+                    <h3 class="font-display text-2xl font-black text-white uppercase">Hoodies & Jackets</h3>
+                    <p class="text-xs text-stone-300 mt-2">Warm fleece fleecewear engineered for cold evenings and bold statements.</p>
+                </div>
+            </div>
+
+            <div onclick="filterCategory('headwear')" class="group relative rounded-3xl overflow-hidden bg-stone-900 h-96 cursor-pointer shadow-soft border border-stone-800">
+                <img src="WhatsApp Image 2026-11-05 at 12.03.51.jpeg" class="w-full h-full object-cover opacity-70 group-hover:scale-105 transition duration-700" alt="Caps & Accessories">
+                <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/30 to-transparent flex flex-col justify-end p-8">
+                    <span class="text-brand-ochre text-[10px] font-black uppercase tracking-widest mb-1">Accessories</span>
+                    <h3 class="font-display text-2xl font-black text-white uppercase">Caps & Headwear</h3>
+                    <p class="text-xs text-stone-300 mt-2">Structured snapbacks and beanies featuring embroidered SDUMANE insignias.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- F. Product Catalogue — 15 Editable Product Slots -->
+    <main id="catalogue" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex-grow">
+        
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-8 pb-6 border-b border-stone-300/60 gap-6">
+            <div>
+                <span class="text-xs font-bold text-brand-terracotta uppercase tracking-widest">Full Inventory</span>
+                <h2 class="font-display text-3xl font-black text-brand-charcoal uppercase tracking-tight">SDUMANE Drop Catalogue</h2>
+            </div>
+            
+            <!-- Filters & Sorting Controls -->
+            <div class="flex flex-wrap items-center gap-3">
+                <div class="flex items-center gap-1 bg-stone-200/70 p-1 rounded-full text-xs font-bold">
+                    <button onclick="filterCategory('all')" id="cat-all" class="cat-btn px-4 py-2 rounded-full bg-brand-charcoal text-white transition">All (15)</button>
+                    <button onclick="filterCategory('tees')" id="cat-tees" class="cat-btn px-4 py-2 rounded-full text-brand-charcoal hover:bg-stone-300 transition">Tees</button>
+                    <button onclick="filterCategory('hoodies')" id="cat-hoodies" class="cat-btn px-4 py-2 rounded-full text-brand-charcoal hover:bg-stone-300 transition">Hoodies</button>
+                    <button onclick="filterCategory('headwear')" id="cat-headwear" class="cat-btn px-4 py-2 rounded-full text-brand-charcoal hover:bg-stone-300 transition">Headwear</button>
+                    <button onclick="filterCategory('bottoms')" id="cat-bottoms" class="cat-btn px-4 py-2 rounded-full text-brand-charcoal hover:bg-stone-300 transition">Bottoms</button>
+                </div>
+                <select id="sortSelect" onchange="sortProducts()" class="bg-stone-200/70 text-brand-charcoal font-bold text-xs rounded-full px-4 py-3 border-none outline-none cursor-pointer">
+                    <option value="default">Sort by: Featured</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="name">Name: A to Z</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Product Grid (Exact 15 Editable Slots) -->
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8">
+            <!-- Dynamically populated via JavaScript -->
+        </div>
+    </main>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+    <!-- Product Quick View Modal -->
+    <div id="productModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div onclick="closeProductModal()" class="absolute inset-0 bg-brand-charcoal/60 backdrop-blur-sm"></div>
+        <div class="relative bg-brand-surface rounded-3xl max-w-xl w-full p-6 sm:p-10 shadow-2xl border border-stone-200 z-10 max-h-[90vh] overflow-y-auto">
+            <button onclick="closeProductModal()" class="absolute top-5 right-5 p-2.5 rounded-full hover:bg-stone-200 transition"><i data-lucide="x" class="w-5 h-5"></i></button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- Search Modal -->
+    <div id="searchModal" class="fixed inset-0 z-50 hidden flex items-start justify-center pt-20 p-4">
+        <div onclick="closeSearchModal()" class="absolute inset-0 bg-brand-charcoal/60 backdrop-blur-sm"></div>
+        <div class="relative bg-brand-surface rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-stone-200 z-10">
+            <div class="flex items-center justify-between pb-4 border-b border-stone-200">
+                <div class="flex items-center gap-3 w-full mr-4">
+                    <i data-lucide="search" class="w-5 h-5 text-brand-muted"></i>
+                    <input type="text" id="searchInputModal" onkeyup="liveSearch()" placeholder="Search products by name or category..." class="w-full bg-transparent border-none text-brand-charcoal font-medium text-base outline-none placeholder-brand-muted">
+                </div>
+                <button onclick="closeSearchModal()" class="p-2 rounded-full hover:bg-stone-200"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <div id="searchResults" class="mt-6 max-h-96 overflow-y-auto space-y-4">
+                <p class="text-xs text-brand-muted text-center py-6">Type above to search the SDUMANE catalogue.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide-out Shopping Cart Drawer -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 hidden transition-opacity">
+        <div onclick="closeCartDrawer()" class="absolute inset-0 bg-brand-charcoal/50 backdrop-blur-sm"></div>
+        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-brand-surface shadow-2xl flex flex-col justify-between border-l border-stone-200">
+                
+                <div class="p-6 border-b border-stone-200 flex items-center justify-between glass-header">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="shopping-bag" class="w-5 h-5 text-brand-terracotta"></i>
+                        <h2 class="font-display text-xl font-black uppercase text-brand-charcoal">Your Shopping Bag</h2>
+                    </div>
+                    <button onclick="closeCartDrawer()" class="p-2 rounded-full hover:bg-stone-200 transition"><i data-lucide="x" class="w-5 h-5"></i></button>
+                </div>
+
+                <div id="cartItemsContainer" class="p-6 overflow-y-auto flex-grow space-y-4">
+                    <!-- Cart items populated via JS -->
+                </div>
+
+                <!-- WhatsApp Checkout Section -->
+                <div class="p-6 border-t border-stone-200 bg-brand-base space-y-4">
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-xs font-semibold text-brand-muted">
+                            <span>Subtotal</span>
+                            <span id="cartSubtotal" class="text-brand-charcoal font-bold">R0.00</span>
+                        </div>
+                        <div class="flex justify-between text-xs font-semibold text-brand-muted">
+                            <span>Delivery Note</span>
+                            <span class="text-brand-terracotta font-bold">Arranged on WhatsApp</span>
+                        </div>
+                        <div class="flex justify-between text-base font-black text-brand-charcoal border-t border-stone-300 pt-2">
+                            <span>Total Amount</span>
+                            <span id="cartTotal" class="text-brand-terracotta">R0.00</span>
+                        </div>
+                    </div>
+
+                    <!-- Checkout Form Inputs -->
+                    <div class="space-y-2 pt-2">
+                        <input type="text" id="custName" placeholder="Your Full Name *" class="w-full bg-white border border-stone-300 rounded-xl px-3.5 py-2.5 text-xs text-brand-charcoal focus:ring-2 focus:ring-brand-terracotta outline-none font-medium">
+                        <input type="text" id="custLocation" placeholder="Delivery Area / Location (e.g. Mamelodi West) *" class="w-full bg-white border border-stone-300 rounded-xl px-3.5 py-2.5 text-xs text-brand-charcoal focus:ring-2 focus:ring-brand-terracotta outline-none font-medium">
+                        <textarea id="custNotes" placeholder="Additional Notes or Size Preferences (Optional)" rows="2" class="w-full bg-white border border-stone-300 rounded-xl px-3.5 py-2.5 text-xs text-brand-charcoal focus:ring-2 focus:ring-brand-terracotta outline-none font-medium"></textarea>
+                    </div>
+
+                    <button onclick="submitWhatsAppCheckout()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition shadow-lg">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        <span>Place Order on WhatsApp</span>
+                    </button>
+                    
+                    <p class="text-[10px] text-center text-brand-muted">Orders are sent directly to the SDUMANE WhatsApp line for confirmation and delivery details.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wishlist Drawer -->
+    <div id="wishlistDrawer" class="fixed inset-0 z-50 hidden transition-opacity">
+        <div onclick="closeWishlistDrawer()" class="absolute inset-0 bg-brand-charcoal/50 backdrop-blur-sm"></div>
+        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-brand-surface shadow-2xl flex flex-col justify-between border-l border-stone-200">
+                <div class="p-6 border-b border-stone-200 flex items-center justify-between glass-header">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="heart" class="w-5 h-5 text-brand-terracotta"></i>
+                        <h2 class="font-display text-xl font-black uppercase text-brand-charcoal">Your Wishlist</h2>
+                    </div>
+                    <button onclick="closeWishlistDrawer()" class="p-2 rounded-full hover:bg-stone-200 transition"><i data-lucide="x" class="w-5 h-5"></i></button>
+                </div>
+                <div id="wishlistItemsContainer" class="p-6 overflow-y-auto flex-grow space-y-4">
+                    <!-- Wishlist items populated via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-brand-charcoal text-brand-base border-t border-stone-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 pb-12 border-b border-stone-800">
+                
+                <div class="space-y-4 md:col-span-1">
+                    <h3 class="font-display text-2xl font-black tracking-tighter text-white">SDUMANE<span class="text-brand-terracotta">.</span></h3>
+                    <p class="text-xs text-stone-400 leading-relaxed">
+                        Proudly made in Mamelodi, Est. 2023. Dedicated to authentic street culture and premium South African fashion.
+                    </p>
+                    <p class="text-xs font-semibold text-brand-ochre">Pretoria, Gauteng, South Africa</p>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-widest text-brand-ochre mb-4">Quick Navigation</h4>
+                    <ul class="space-y-2.5 text-xs text-stone-400 font-medium">
+                        <li><a href="#catalogue" class="hover:text-white transition">Drop Catalogue</a></li>
+                        <li><a href="#collections" class="hover:text-white transition">Featured Collections</a></li>
+                        <li><a href="#about" class="hover:text-white transition">Our Story</a></li>
+                        <li><a href="#" onclick="openCartDrawer()" class="hover:text-white transition">Shopping Bag</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-widest text-brand-ochre mb-4">Connect With Us</h4>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="https://instagram.com" target="_blank" class="p-3 bg-stone-800 rounded-full hover:bg-brand-terracotta text-white transition" title="Instagram">
+                            <i data-lucide="instagram" class="w-4 h-4"></i>
+                        </a>
+                        <a href="https://facebook.com" target="_blank" class="p-3 bg-stone-800 rounded-full hover:bg-brand-terracotta text-white transition" title="Facebook">
+                            <i data-lucide="facebook" class="w-4 h-4"></i>
+                        </a>
+                        <a href="https://tiktok.com" target="_blank" class="p-3 bg-stone-800 rounded-full hover:bg-brand-terracotta text-white transition" title="TikTok">
+                            <i data-lucide="music-2" class="w-4 h-4"></i>
+                        </a>
+                        <a href="https://wa.me/27785969516" target="_blank" class="p-3 bg-stone-800 rounded-full hover:bg-brand-terracotta text-white transition" title="WhatsApp">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                    <p class="text-[11px] text-stone-500 mt-4">Follow our channels for upcoming drop releases.</p>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-widest text-brand-ochre mb-4">Order Information</h4>
+                    <p class="text-xs text-stone-400 mb-3">All orders are processed securely via WhatsApp messaging with our team.</p>
+                    <span class="inline-block bg-stone-800 text-stone-300 text-[10px] font-bold px-3.5 py-1.5 rounded-md border border-stone-700">EFT / Cash / eWallet Supported</span>
+                </div>
+            </div>
+
+            <!-- Fine Print & Talon IT Solutions Credit -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-stone-500 gap-4">
+                <p>&copy; 2026 SDUMANE. All Rights Reserved. Made in Mamelodi, Est. 2023.</p>
+                
+                <p class="font-medium tracking-wider">
+                    POWERED BY <span class="text-stone-300 font-bold tracking-widest">TALON IT SOLUTIONS</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Core -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Website Configuration & 15 Editable Product Slots
+        const CONFIG = {
+            brandName: "SDUMANE",
+            tagline: "Made in Mamelodi, Est. 2023",
+            whatsappNumber: "27785969516",
+            currency: "R",
+            
+            // EXACTLY 15 EDITABLE PRODUCT SLOTS
+            products: [
+                {
+                    id: 1,
+                    name: "SDUMANE Signature Graphic Tee",
+                    description: "Heavyweight 240gsm combed cotton tee featuring the iconic Mamelodi crest typography.",
+                    price: 380,
+                    category: "tees",
+                    image: "WhatsApp Image 2026-11-05 at 12.03.51.jpeg",
+                    sizes: ["S", "M", "L", "XL", "XXL"],
+                    colors: ["Off-White", "Charcoal"],
+                    available: true,
+                    tag: "Best Seller"
+                },
+                {
+                    id: 2,
+                    name: "Mamelodi Heritage Boxy Tee",
+                    description: "Relaxed fit streetwear tee designed for daily wear with breathable cotton fabric.",
+                    price: 350,
+                    category: "tees",
+                    image: "WhatsApp Image 2026-11-05 at 12.03.51 (1).jpeg",
+                    sizes: ["S", "M", "L", "XL"],
+                    colors: ["Sand", "Black"],
+                    available: true,
+                    tag: "New Drop"
+                },
+                {
+                    id: 3,
+                    name: "SDUMANE Est. 2023 Heavy Hoodie",
+                    description: "Fleece-lined premium pullover hoodie engineered for warmth and structure.",
+                    price: 720,
+                    category: "hoodies",
+                    image: "WhatsApp Image 2026-11-05 at 12.03.51.jpeg",
+                    sizes: ["M", "L", "XL", "XXL"],
+                    colors: ["Charcoal", "Ochre"],
+                    available: true,
+                    tag: "Featured"
+                },
+                {
+                    id: 4,
+                    name: "Kasi Classic Snapback Cap",
+                    description: "Structured wool-blend cap with 3D raised embroidery SDUMANE insignia.",
+                    price: 280,
+                    category: "headwear",
+                    image: "WhatsApp Image 2026-11-05 at 12.03.51 (1).jpeg",
+                    sizes: ["Adjustable"],
+                    colors: ["Black", "Terracotta"],
+                    available: true,
+                    tag: "Essential"
+                },
+                {
+                    id: 5,
+                    name: "SDUMANE Tactical Cargo Pants",
+                    description: "Multi-pocket durable cotton utility pants tailored for a modern streetwear silhouette.",
+                    price: 650,
+                    category: "bottoms",
+                    image: "",
+                    sizes: ["30", "32", "34", "36"],
+                    colors: ["Olive", "Black"],
+                    available: false,
+                    tag: "Coming Soon"
+                },
+                {
+                    id: 6,
+                    name: "Mamelodi Raw Ochre Oversized Tee",
+                    description: "Acid-washed cotton tee with vintage garment dye finish and minimal chest branding.",
+                    price: 400,
+                    category: "tees",
+                    image: "",
+                    sizes: ["S", "M", "L", "XL"],
+                    colors: ["Ochre Wash"],
+                    available: false,
+                    tag: "Editable Slot"
+                },
+                {
+                    id: 7,
+                    name: "SDUMANE Fleece Sweatpants",
+                    description: "Heavyweight brushed fleece lounge trousers with elasticated cuffs and deep pockets.",
+                    price: 580,
+                    category: "bottoms",
+                    image: "",
+                    sizes: ["S", "M", "L", "XL"],
+                    colors: ["Charcoal", "Sand"],
+                    available: false,
+                    tag: "Editable Slot"
+                },
+                {
+                    id: 8,
+                    name: "SDUMANE Embroidered Beanie",
+                    description: "Ribbed knit acrylic beanie for colder weather styling and clean branding.",
+                    price: 220,
+                    category: "headwear",
+                    image: "",
+                    sizes: ["One Size"],
+                    colors: ["Black", "Terracotta"],
+                    available: false,
+                    tag: "Editable Slot"
+                },
+                {
+                    id: 9,
+                    name: "Mamelodi 2023 Zip-Up Hoodie",
+                    description: "Full-zip heavyweight hoodie with custom metallic hardware and double-lined hood.",
+                    price: 780,
+                    category: "hoodies",
+                    image: "",
+                    sizes: ["M", "L", "XL"],
+                    colors: ["Charcoal"],
+                    available: false,
+                    tag: "Editable Slot"
+                },
+                {
+                    id: 10,
+                    name: "SDUMANE Crossbody Utility Bag",
+                    description: "Water-resistant ripstop nylon bag with adjustable strap and secure zip compartments.",
+                    price: 320,
+                    category: "accessories",
+                    image: "",
+                    sizes: ["Standard"],
+                    colors: ["Black"],
+                    available: false,
+                    tag: "Editable Slot"
+                },
+                {
+                    id: 11,
+                    name: "Kasi Vintage Wash Crewneck",
+                    description: "Classic crewneck sweatshirt featuring distressed ribbed collar and cuffs.",
+                    price: 650,
+                    category: "hoodies",
+                    image: "",
+                    sizes: ["S", "M", "L", "XL"],
+                    colors: ["Vintage Grey"],
+                    available: false,
+                    tag: "Editable Slot"
+                },
+                {
+                    id: 12,
+                    name: "SDUMANE Minimalist Socks (3-Pack)",
+                    description: "Combed cotton ribbed crew socks with jacquard knit brand logo detail.",
+                    price: 180,
+                    category: "accessories",
+                    image: "",
+                    sizes: ["S/M", "L/XL"],
+                    colors: ["White", "Black"],
+                    available: false,
+                    tag: "Editable Slot"
+                },
+                {
+                    id: 13,
+                    name: "Mamelodi Summer Athletics Shorts",
+                    description: "Lightweight breathable mesh shorts with secure zipped side pockets.",
+                    price: 350,
+                    category: "bottoms",
+                    image: "",
+                    sizes: ["S", "M", "L", "XL"],
+                    colors: ["Black", "Sand"],
+                    available: false,
+                    tag: "Editable Slot"
+                },
+                {
+                    id: 14,
+                    name: "SDUMANE Trucker Mesh Cap",
+                    description: "Classic foam front trucker hat with breathable mesh back and snap closure.",
+                    price: 250,
+                    category: "headwear",
+                    image: "",
+                    sizes: ["Adjustable"],
+                    colors: ["Black/White"],
+                    available: false,
+                    tag: "Editable Slot"
+                },
+                {
+                    id: 15,
+                    name: "SDUMANE Limited Edition Windbreaker",
+                    description: "Lightweight weather-resistant shell jacket with packable hood and custom pull cords.",
+                    price: 890,
+                    category: "hoodies",
+                    image: "",
+                    sizes: ["M", "L", "XL"],
+                    colors: ["Charcoal/Ochre"],
+                    available: false,
+                    tag: "Editable Slot"
+                }
+            ]
+        };
+
+        // State Management
+        let cart = JSON.parse(localStorage.getItem('sdumane_cart')) || [];
+        let wishlist = JSON.parse(localStorage.getItem('sdumane_wishlist')) || [];
+        let currentFilter = 'all';
+
+        // Render Products Catalogue
+        function renderCatalogue(productsToRender) {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+
+            productsToRender.forEach(prod => {
+                const card = document.createElement('div');
+                card.className = "bg-brand-surface rounded-2xl overflow-hidden border border-stone-300/60 shadow-soft hover:shadow-card transition-all duration-300 flex flex-col justify-between group";
+                
+                const isWishlisted = wishlist.some(item => item.id === prod.id);
+                
+                let imageHTML = prod.image ? 
+                    `<img src="${prod.image}" alt="${prod.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">` : 
+                    `<div class="w-full h-full bg-stone-200/80 border-2 border-dashed border-stone-300 flex flex-col items-center justify-center p-4 text-center">
+                        <i data-lucide="image" class="w-8 h-8 text-stone-400 mb-2"></i>
+                        <span class="text-[10px] font-bold text-brand-muted uppercase">Slot #${prod.id} Empty</span>
+                        <span class="text-[9px] text-stone-400 mt-1">Ready for product photo</span>
+                    </div>`;
+
+                card.innerHTML = `
+                    <div class="relative h-64 sm:h-72 bg-stone-100 overflow-hidden cursor-pointer" onclick="openProductModal(${prod.id})">
+                        ${imageHTML}
+                        <div class="absolute top-3 left-3 flex gap-2">
+                            <span class="bg-brand-charcoal text-white text-[9px] font-black uppercase px-2.5 py-1 rounded-full tracking-widest shadow-md">
+                                ${prod.tag}
+                            </span>
+                            ${!prod.available ? '<span class="bg-stone-500 text-white text-[9px] font-bold uppercase px-2.5 py-1 rounded-full">Coming Soon</span>' : ''}
+                        </div>
+                        <button onclick="event.stopPropagation(); toggleWishlist(${prod.id})" class="absolute top-3 right-3 p-2 bg-white/80 backdrop-blur-md rounded-full hover:bg-white transition text-brand-charcoal" aria-label="Wishlist">
+                            <i data-lucide="heart" class="w-4 h-4 ${isWishlisted ? 'fill-brand-terracotta text-brand-terracotta' : ''}"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="p-5 flex flex-col flex-grow justify-between">
+                        <div>
+                            <p class="text-[10px] font-bold uppercase tracking-wider text-brand-terracotta mb-1">${prod.category}</p>
+                            <h3 class="font-display font-bold text-base text-brand-charcoal group-hover:text-brand-terracotta transition line-clamp-1 cursor-pointer" onclick="openProductModal(${prod.id})">${prod.name}</h3>
+                            <p class="text-xs text-brand-muted mt-1.5 line-clamp-2">${prod.description}</p>
+                        </div>
+                        <div class="mt-5 pt-3 border-t border-stone-200 flex items-center justify-between">
+                            <span class="font-display font-black text-lg text-brand-charcoal">${CONFIG.currency}${prod.price}</span>
+                            ${prod.available ? `
+                                <button onclick="addToCart(${prod.id})" class="bg-brand-charcoal hover:bg-brand-terracotta text-white px-4 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition shadow-sm flex items-center gap-1.5 active:scale-95">
+                                    <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i>
+                                    <span>Add</span>
+                                </button>
+                            ` : `
+                                <span class="text-[11px] font-bold text-stone-400 uppercase">Preview Only</span>
+                            `}
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            lucide.createIcons();
+        }
+
+        // Filtering Products
+        function filterCategory(category) {
+            currentFilter = category;
+            
+            // Update active pill button style
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-charcoal', 'text-white');
+                btn.classList.add('text-brand-charcoal');
+            });
+            const activeBtn = document.getElementById(`cat-${category}`);
+            if(activeBtn) {
+                activeBtn.classList.add('bg-brand-charcoal', 'text-white');
+                activeBtn.classList.remove('text-brand-charcoal');
+            }
+
+            if (category === 'all') {
+                renderCatalogue(CONFIG.products);
+            } else {
+                const filtered = CONFIG.products.filter(p => p.category === category);
+                renderCatalogue(filtered);
+            }
+        }
+
+        // Sorting Products
+        function sortProducts() {
+            const sortBy = document.getElementById('sortSelect').value;
+            let currentList = currentFilter === 'all' ? [...CONFIG.products] : CONFIG.products.filter(p => p.category === currentFilter);
+
+            if (sortBy === 'price-low') {
+                currentList.sort((a, b) => a.price - b.price);
+            } else if (sortBy === 'price-high') {
+                currentList.sort((a, b) => b.price - a.price);
+            } else if (sortBy === 'name') {
+                currentList.sort((a, b) => a.name.localeCompare(b.name));
+            }
+            renderCatalogue(currentList);
+        }
+
+        // Product Quick View Modal
+        function openProductModal(id) {
+            const prod = CONFIG.products.find(p => p.id === id);
+            if (!prod) return;
+
+            const modalContent = document.getElementById('modalContent');
+            let imageHTML = prod.image ? 
+                `<img src="${prod.image}" alt="${prod.name}" class="w-full h-full object-cover rounded-2xl">` : 
+                `<div class="w-full h-full bg-stone-200 rounded-2xl flex items-center justify-center p-6 text-center">
+                    <span class="text-xs font-bold text-brand-muted">Product Slot #${prod.id} (Image Placeholder)</span>
+                </div>`;
+
+            modalContent.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="h-72 sm:h-80 bg-stone-100 rounded-2xl overflow-hidden shadow-sm">
+                        ${imageHTML}
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <span class="text-[10px] font-bold text-brand-terracotta uppercase tracking-widest">${prod.tag} • ${prod.category}</span>
+                            <h3 class="font-display text-2xl font-black text-brand-charcoal mt-1">${prod.name}</h3>
+                            <p class="font-display font-black text-xl text-brand-terracotta mt-1">${CONFIG.currency}${prod.price}</p>
+                        </div>
+                        <p class="text-xs text-brand-muted leading-relaxed">${prod.description}</p>
+                        
+                        <div class="space-y-3 pt-2">
+                            <div>
+                                <label class="text-[11px] font-bold uppercase text-brand-charcoal block mb-1">Select Size:</label>
+                                <div class="flex flex-wrap gap-2" id="modalSizes">
+                                    ${prod.sizes.map((s, idx) => `<button onclick="selectModalSize(this)" class="size-btn px-3 py-1.5 rounded-lg border text-xs font-bold ${idx===0 ? 'border-brand-charcoal bg-brand-charcoal text-white' : 'border-stone-300 text-brand-charcoal'}">${s}</button>`).join('')}
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="text-[11px] font-bold uppercase text-brand-charcoal block mb-1">Available Colours:</label>
+                                <div class="flex gap-2">
+                                    ${prod.colors.map(c => `<span class="px-3 py-1 bg-stone-200/80 rounded-md text-xs font-medium text-brand-charcoal">${c}</span>`).join('')}
+                                </div>
+                            </div>
+                        </div>
+
+                        ${prod.available ? `
+                            <button onclick="addModalToCart(${prod.id})" class="w-full bg-brand-charcoal hover:bg-brand-terracotta text-white font-bold py-3.5 rounded-xl text-xs uppercase tracking-widest transition shadow-lg mt-4 flex items-center justify-center gap-2">
+                                <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                                <span>Add to Bag</span>
+                            </button>
+                        ` : `
+                            <p class="text-xs font-bold text-stone-500 uppercase pt-2">This product slot is currently in preview mode.</p>
+                        `}
+                    </div>
+                </div>
+            `;
+            document.getElementById('productModal').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function selectModalSize(btn) {
+            document.querySelectorAll('.size-btn').forEach(b => {
+                b.classList.remove('border-brand-charcoal', 'bg-brand-charcoal', 'text-white');
+                b.classList.add('border-stone-300', 'text-brand-charcoal');
+            });
+            btn.classList.add('border-brand-charcoal', 'bg-brand-charcoal', 'text-white');
+            btn.classList.remove('border-stone-300', 'text-brand-charcoal');
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModal').classList.add('hidden');
+        }
+
+        // Cart Functionality
+        function addToCart(id, selectedSize = null) {
+            const product = CONFIG.products.find(p => p.id === id);
+            if (!product || !product.available) {
+                showToast("Product is not available for purchase yet.", "error");
+                return;
+            }
+
+            const size = selectedSize || product.sizes[0] || 'Standard';
+            const existing = cart.find(item => item.id === id && item.size === size);
+
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ ...product, qty: 1, size });
+            }
+
+            saveCart();
+            updateCartUI();
+            showToast(`Added ${product.name} to your bag.`, "success");
+            openCartDrawer();
+        }
+
+        function addModalToCart(id) {
+            const activeSizeBtn = document.querySelector('.size-btn.bg-brand-charcoal');
+            const size = activeSizeBtn ? activeSizeBtn.innerText : 'Standard';
+            closeProductModal();
+            addToCart(id, size);
+        }
+
+        function saveCart() {
+            localStorage.setItem('sdumane_cart', JSON.stringify(cart));
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cartItemsContainer');
+            const countEl = document.getElementById('cartCount');
+            const subtotalEl = document.getElementById('cartSubtotal');
+            const totalEl = document.getElementById('cartTotal');
+
+            const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+            countEl.innerText = totalCount;
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            subtotalEl.innerText = `${CONFIG.currency}${subtotal.toFixed(2)}`;
+            totalEl.innerText = `${CONFIG.currency}${subtotal.toFixed(2)}`;
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-16 text-brand-muted">
+                        <i data-lucide="shopping-bag" class="w-12 h-12 mx-auto mb-3 text-stone-300"></i>
+                        <p class="text-sm font-semibold">Your shopping bag is empty.</p>
+                        <p class="text-xs text-stone-400 mt-1">Explore our catalogue to add pieces.</p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = cart.map((item, index) => `
+                    <div class="flex items-center justify-between bg-white p-4 rounded-2xl border border-stone-200 shadow-sm">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-14 h-14 bg-stone-100 rounded-xl overflow-hidden flex items-center justify-center font-bold text-xs text-stone-400 flex-shrink-0">
+                                ${item.image ? `<img src="${item.image}" class="w-full h-full object-cover">` : `#${item.id}`}
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-xs text-brand-charcoal line-clamp-1">${item.name}</h4>
+                                <p class="text-[11px] text-brand-terracotta font-bold">${CONFIG.currency}${item.price} • Size: ${item.size}</p>
+                                <div class="flex items-center gap-2 mt-1.5">
+                                    <button onclick="changeQty(${index}, -1)" class="w-6 h-6 bg-stone-100 hover:bg-stone-200 rounded-full font-bold text-xs flex items-center justify-center">-</button>
+                                    <span class="text-xs font-bold w-4 text-center">${item.qty}</span>
+                                    <button onclick="changeQty(${index}, 1)" class="w-6 h-6 bg-stone-100 hover:bg-stone-200 rounded-full font-bold text-xs flex items-center justify-center">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="p-2 text-stone-400 hover:text-brand-terracotta transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                    </div>
+                `).join('');
+            }
+            lucide.createIcons();
+        }
+
+        function changeQty(index, delta) {
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            saveCart();
+            updateCartUI();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            saveCart();
+            updateCartUI();
+            showToast("Item removed from bag.", "info");
+        }
+
+        function openCartDrawer() {
+            document.getElementById('cartDrawer').classList.remove('hidden');
+        }
+
+        function closeCartDrawer() {
+            document.getElementById('cartDrawer').classList.add('hidden');
+        }
+
+        // WhatsApp Checkout Integration
+        function submitWhatsAppCheckout() {
+            if (cart.length === 0) {
+                showToast("Your bag is empty. Add products to checkout.", "error");
+                return;
+            }
+
+            const name = document.getElementById('custName').value.trim();
+            const location = document.getElementById('custLocation').value.trim();
+            const notes = document.getElementById('custNotes').value.trim();
+
+            if (!name || !location) {
+                showToast("Please enter your name and delivery location.", "error");
+                return;
+            }
+
+            let message = `*SDUMANE ORDER REQUEST* 🛍️\n\n`;
+            message += `*Customer:* ${name}\n`;
+            message += `*Delivery Location:* ${location}\n`;
+            if (notes) message += `*Notes:* ${notes}\n`;
+            message += `----------------------------------\n`;
+
+            let subtotal = 0;
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.qty;
+                subtotal += itemTotal;
+                message += `${index + 1}. *${item.name}*\n   Size: ${item.size} | Qty: ${item.qty} | Price: ${CONFIG.currency}${itemTotal}\n`;
+            });
+
+            message += `----------------------------------\n`;
+            message += `*TOTAL AMOUNT:* ${CONFIG.currency}${subtotal.toFixed(2)}\n\n`;
+            message += `Please confirm stock availability and delivery arrangements. Thank you!`;
+
+            const encoded = encodeURIComponent(message);
+            window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encoded}`, '_blank');
+        }
+
+        // Wishlist Functionality
+        function toggleWishlist(id) {
+            const product = CONFIG.products.find(p => p.id === id);
+            const index = wishlist.findIndex(item => item.id === id);
+
+            if (index > -1) {
+                wishlist.splice(index, 1);
+                showToast(`Removed ${product.name} from wishlist.`, "info");
+            } else {
+                wishlist.push(product);
+                showToast(`Added ${product.name} to wishlist.`, "success");
+            }
+
+            localStorage.setItem('sdumane_wishlist', JSON.stringify(wishlist));
+            updateWishlistUI();
+            renderCatalogue(currentFilter === 'all' ? CONFIG.products : CONFIG.products.filter(p => p.category === currentFilter));
+        }
+
+        function updateWishlistUI() {
+            const container = document.getElementById('wishlistItemsContainer');
+            const countEl = document.getElementById('wishlistCount');
+            countEl.innerText = wishlist.length;
+
+            if (wishlist.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-16 text-brand-muted">
+                        <i data-lucide="heart" class="w-12 h-12 mx-auto mb-3 text-stone-300"></i>
+                        <p class="text-sm font-semibold">Your wishlist is empty.</p>
+                        <p class="text-xs text-stone-400 mt-1">Tap the heart icon on products to save them.</p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = wishlist.map((item, index) => `
+                    <div class="flex items-center justify-between bg-white p-4 rounded-2xl border border-stone-200 shadow-sm">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-14 h-14 bg-stone-100 rounded-xl overflow-hidden flex items-center justify-center font-bold text-xs text-stone-400 flex-shrink-0">
+                                ${item.image ? `<img src="${item.image}" class="w-full h-full object-cover">` : `#${item.id}`}
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-xs text-brand-charcoal line-clamp-1">${item.name}</h4>
+                                <p class="text-[11px] text-brand-terracotta font-bold">${CONFIG.currency}${item.price}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            ${item.available ? `<button onclick="addToCart(${item.id}); toggleWishlist(${item.id}); closeWishlistDrawer();" class="p-2 bg-brand-charcoal text-white rounded-full hover:bg-brand-terracotta transition"><i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i></button>` : ''}
+                            <button onclick="toggleWishlist(${item.id})" class="p-2 text-stone-400 hover:text-brand-terracotta transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            lucide.createIcons();
+        }
+
+        function openWishlistDrawer() {
+            document.getElementById('wishlistDrawer').classList.remove('hidden');
+        }
+
+        function closeWishlistDrawer() {
+            document.getElementById('wishlistDrawer').classList.add('hidden');
+        }
+
+        // Search Modal Functionality
+        function openSearchModal() {
+            document.getElementById('searchModal').classList.remove('hidden');
+            document.getElementById('searchInputModal').focus();
+        }
+
+        function closeSearchModal() {
+            document.getElementById('searchModal').classList.add('hidden');
+        }
+
+        function liveSearch() {
+            const query = document.getElementById('searchInputModal').value.toLowerCase();
+            const resultsContainer = document.getElementById('searchResults');
+
+            if (!query.trim()) {
+                resultsContainer.innerHTML = `<p class="text-xs text-brand-muted text-center py-6">Type above to search the SDUMANE catalogue.</p>`;
+                return;
+            }
+
+            const matched = CONFIG.products.filter(p => p.name.toLowerCase().includes(query) || p.description.toLowerCase().includes(query) || p.category.toLowerCase().includes(query));
+
+            if (matched.length === 0) {
+                resultsContainer.innerHTML = `<p class="text-xs text-brand-muted text-center py-6">No products found matching "${query}".</p>`;
+            } else {
+                resultsContainer.innerHTML = matched.map(prod => `
+                    <div onclick="closeSearchModal(); openProductModal(${prod.id});" class="flex items-center justify-between bg-white p-3.5 rounded-2xl border border-stone-200 hover:border-brand-terracotta transition cursor-pointer">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-stone-100 rounded-xl overflow-hidden flex items-center justify-center font-bold text-xs text-stone-400 flex-shrink-0">
+                                ${prod.image ? `<img src="${prod.image}" class="w-full h-full object-cover">` : `#${prod.id}`}
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-xs text-brand-charcoal">${prod.name}</h4>
+                                <p class="text-[10px] text-brand-terracotta font-bold uppercase">${prod.category} • ${CONFIG.currency}${prod.price}</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-brand-charcoal">&rarr;</span>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Toast Notification System
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            
+            let bg = 'bg-brand-charcoal text-white';
+            if (type === 'error') bg = 'bg-red-600 text-white';
+            if (type === 'info') bg = 'bg-stone-800 text-white';
+
+            toast.className = `${bg} px-5 py-3 rounded-2xl text-xs font-bold shadow-xl flex items-center gap-3 pointer-events-auto transition-all duration-300 translate-y-4 opacity-0`;
+            toast.innerHTML = `<span>${message}</span>`;
+            
+            container.appendChild(toast);
+            setTimeout(() => toast.classList.remove('translate-y-4', 'opacity-0'), 10);
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-4', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        // Initialisation on Page Load
+        renderCatalogue(CONFIG.products);
+        updateCartUI();
+        updateWishlistUI();
+    </script>
+</body>
+</html>
